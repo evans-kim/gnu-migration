@@ -17,5 +17,12 @@
             "name": "evanskim",
             "email": "korodo@naver.com"
         }
-    ]
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "EvansKim\\GnuMigration\\GnuMigrationServiceProvider"
+            ]
+        }
+    }
 }

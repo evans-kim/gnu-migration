@@ -40,4 +40,43 @@ gnu4 R.I.P
 그누보드 특성상 여러가지로 커스터마이징 된 사례가 많아 통합하기 어렵겠지만
 필수적이다고 생각되는 기능이 있다면 리퀘스트나 이슈 올리시면 고민해 보겠습니다.
 
+## 사용방법
 
+#### 설치하기
+라라벨을 설치한 폴더에서 패키지를 설치합니다.
+라라벨 5.5 이상은 자동으로 서비스 프로바이더를 등록됩니다.
+이후 필요한 기능을 아래에서 찾아 적용하시면 됩니다.
+
+    composer require evanskim/gnu-magration
+
+#### 1.사용자 인증
+기존의 g4_member 테이블에 있는 사용자 정보를 그대로 이용하여 라라벨에서 로그인 할 수 있습니다.
+아래의 파일과 같이 해당 파일을 수정해 주세요.
+
+LoginController.php
+    
+    use EvansKim\GnuMigration\AuthenticatesGnuMembers;
+    
+    class LoginController extends Controller
+    {
+         use AuthenticatesGnuMembers; // 기존의 트레이스를 교체합니다.    
+
+
+config/auth.php
+
+    'web' => [
+        'driver' => 'session',
+        'provider' => 'members', // 원래값은 users 
+    ],
+    'providers' => [
+        // 프로바이더에 새로 추가 또는 
+        'members' => [
+            'driver' => 'gnu',
+            'model' => \EvansKim\GnuMigration\Member::class,
+        ],
+    ]
+    
+뷰에서 로그인 컨트롤러로 보내는 폼 인풋 name 은 반드시 'mb_id' , 'mb_password' 이어야 합니다.
+
+    <input id="mb_id" type="text" class="form-control{{ $errors->has('mb_id') ? ' is-invalid' : '' }}" name="mb_id" value="{{ old('mb_id') }}" required autofocus>
+    <input id="mb_password" type="password" class="form-control{{ $errors->has('mb_password') ? ' is-invalid' : '' }}" name="mb_password" required>
