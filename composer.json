@@ -1,0 +1,21 @@
+{
+    "name": "evanskim/gnu-magration",
+    "description": ": Migration Tools for Gnuboard4",
+    "type": "library",
+    "require": {
+        "php": "^7.0",
+        "laravel/laravel": "^5.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "EvansKim\\GnuMigration": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "evanskim",
+            "email": "korodo@naver.com"
+        }
+    ]
+}
