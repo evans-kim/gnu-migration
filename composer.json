@@ -8,7 +8,7 @@
     },
     "autoload": {
         "psr-4": {
-            "EvansKim\\GnuMigration": "src/"
+            "EvansKim\\GnuMigration\\": "src/"
         }
     },
     "license": "MIT",
