@@ -2,19 +2,14 @@
 
 namespace EvansKim\GnuMigration;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-
-
-class Member extends Model implements Authenticatable
+class Member extends Authenticatable
 {
-    use Authorizable;
 
     protected $table="g4_member";
-    protected $primaryKey = 'mb_id';
-    public $incrementing = false;
+    protected $primaryKey = 'mb_no';
+
     const UPDATED_AT = null;
     const CREATED_AT = "mb_datetime";
 

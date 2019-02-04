@@ -1,4 +1,11 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: evanskim
+ * Date: 01/02/2019
+ * Time: 3:44 PM
+ */
+
 namespace EvansKim\GnuMigration;
 
 use Illuminate\Http\Request;
@@ -9,7 +16,13 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 trait AuthenticatesGnuMembers
 {
-    use RedirectsUsers, ThrottlesLogins;
+    /**
+     * 로그인
+     *
+     * @bodyParam mb_id string required 맴버 아이디.
+     * @bodyParam mb_password string required 맴버 비밀번호.
+     * @bodyParam remember boolean 자동 로그인
+     */
     public function login(Request $request)
     {
         $this->validateLogin($request);
@@ -34,6 +47,8 @@ trait AuthenticatesGnuMembers
 
         return $this->sendFailedLoginResponse($request);
     }
+
+    use RedirectsUsers, ThrottlesLogins;
     protected function validateLogin(Request $request)
     {
         $request->validate([
@@ -109,7 +124,9 @@ trait AuthenticatesGnuMembers
     }
 
     /**
-     * Log the user out of the application.
+     * 로그아웃
+     *
+     * @authenticated
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

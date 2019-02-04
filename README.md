@@ -63,6 +63,7 @@ LoginController.php
 
 
 config/auth.php
+인증 드라이버는 file, session 만 지원됩니다. 
 
     'web' => [
         'driver' => 'session',
@@ -71,11 +72,20 @@ config/auth.php
     'providers' => [
         // 프로바이더에 새로 추가 또는 
         'members' => [
-            'driver' => 'gnu',
-            'model' => \EvansKim\GnuMigration\Member::class,
+            'driver' => 'gnu'
         ],
     ]
-    
+
+session 드라이버를 사용할 때에는 반드시 g4_member 테이블에 mb_no (auto increment primary key) 필드가 있어야 합니다.
+만약에 해당 필드가 없다면 마이그레이션 파일을 추가하고 마이그레이션 하세요.
+자동로그인 기능을 위해서도 아래의 마이그레이션을 추가하고 실행하세요.
+
+    php artisan vendor:publish --tag=config    
+
+폼필드 값을 보낼 라우트는 기존의 값과 동일합니다. 대부분의 정적 라우트 값을 그대로 차용하는 것을 원칙으로 합니다.
+
+    <form method="post" action='http://mydoman.com/bbs/login.php'>
+
 뷰에서 로그인 컨트롤러로 보내는 폼 인풋 name 은 반드시 'mb_id' , 'mb_password' 이어야 합니다.
 
     <input id="mb_id" type="text" class="form-control{{ $errors->has('mb_id') ? ' is-invalid' : '' }}" name="mb_id" value="{{ old('mb_id') }}" required autofocus>

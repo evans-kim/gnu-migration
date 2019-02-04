@@ -1,4 +1,5 @@
 <?php
+
 namespace EvansKim\GnuMigration;
 
 use Illuminate\Contracts\Auth\Authenticatable;
