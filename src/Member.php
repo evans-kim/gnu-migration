@@ -2,16 +2,23 @@
 
 namespace EvansKim\GnuMigration;
 
+use Illuminate\Contracts\Notifications\Dispatcher;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Auth\Notifications\ResetPassword as ResetPasswordNotification;
+use Illuminate\Support\Str;
 
 class Member extends Authenticatable
 {
+    use Notifiable;
 
     protected $table="g4_member";
     protected $primaryKey = 'mb_no';
-
+    public $incrementing = false;
     const UPDATED_AT = null;
     const CREATED_AT = "mb_datetime";
+
 
     /**
      * The attributes that should be hidden for arrays.
@@ -24,15 +31,28 @@ class Member extends Authenticatable
 
     protected $fillable = ['mb_id', 'mb_password', 'mb_email', 'mb_name', 'mb_nick', 'mb_birth','mb_sex'];
 
-    public function points()
-    {
-        return $this->hasMany(Point::class,'mb_id', 'mb_id');
-    }
     static public function hash($value)
     {
         return \DB::select("select password(?) as password", [$value])[0]->password;
     }
+    public function getEmailForPasswordReset(){
+        return $this->mb_email;
+    }
+    public function routeNotificationFor($driver, $notification = null)
+    {
+        if (method_exists($this, $method = 'routeNotificationFor'.Str::studly($driver))) {
+            return $this->{$method}($notification);
+        }
 
+        switch ($driver) {
+            case 'database':
+                return $this->notifications();
+            case 'mail':
+                return $this->mb_email;
+            case 'nexmo':
+                return $this->mb_hp;
+        }
+    }
     /**
      * Get the name of the unique identifier for the user.
      *
