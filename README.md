@@ -19,9 +19,9 @@ gnu4 R.I.P
 
 
 #### TODO
-- 기존 사용자 로그인
+- ~~기존 사용자 로그인~~
+- ~~비밀번호 찾기~~ 
 - 사용자 가입
-- 비밀번호 찾기
 - 게시판
     - 게시판 CRUD
     - 게시판 스킨설정 (Vue Dynamic Components)
@@ -84,9 +84,24 @@ session 드라이버를 사용할 때에는 반드시 g4_member 테이블에 mb_
 
 폼필드 값을 보낼 라우트는 기존의 값과 동일합니다. 대부분의 정적 라우트 값을 그대로 차용하는 것을 원칙으로 합니다.
 
-    <form method="post" action='http://mydoman.com/bbs/login.php'>
+API
 
-뷰에서 로그인 컨트롤러로 보내는 폼 인풋 name 은 반드시 'mb_id' , 'mb_password' 이어야 합니다.
+    curl -X POST "http://mydomain/bbs/login.php" 
+        -d "mb_id"="test" -d "mb_password"="test" -d "remember"="false" //or true
 
-    <input id="mb_id" type="text" class="form-control{{ $errors->has('mb_id') ? ' is-invalid' : '' }}" name="mb_id" value="{{ old('mb_id') }}" required autofocus>
-    <input id="mb_password" type="password" class="form-control{{ $errors->has('mb_password') ? ' is-invalid' : '' }}" name="mb_password" required>
+#### 2. 비밀번호 찾기
+라라벨의 비밀번호 찾기 기능도 동일하게 사용할 수 있습니다. 아래의 설정파일에서 provider를 변경해 주세요.
+
+config/auth.php
+
+    'passwords' => [
+        'users' => [
+            'provider' => 'members', // users -> members 로 바꾸어 주세요. 
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+    ],
+    
+API
+
+    curl -X POST "http://mydomain/bbs/password_lost2.php"     -d "email"="test@test.com" 
