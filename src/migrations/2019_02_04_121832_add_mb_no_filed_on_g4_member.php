@@ -15,7 +15,6 @@ class AddMbNoFiledOnG4Member extends Migration
     {
         Schema::table("g4_member", function(Blueprint $table){
             $table->increments('mb_no');
-            $table->string('mb_remember')->nullable();
         });
     }
 
@@ -28,7 +27,6 @@ class AddMbNoFiledOnG4Member extends Migration
     {
         Schema::table("g4_member", function(Blueprint $table){
             $table->dropColumn('mb_no');
-            $table->dropColumn("mb_remember");
         });
     }
 }

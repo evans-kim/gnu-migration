@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 trait AuthenticatesGnuMembers
 {
+    use RedirectsUsers, ThrottlesLogins;
     /**
      * 로그인
      *
@@ -48,7 +49,7 @@ trait AuthenticatesGnuMembers
         return $this->sendFailedLoginResponse($request);
     }
 
-    use RedirectsUsers, ThrottlesLogins;
+
     protected function validateLogin(Request $request)
     {
         $request->validate([

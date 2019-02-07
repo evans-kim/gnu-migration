@@ -1,9 +1,11 @@
 <?php
 namespace EvansKim\GnuMigration;
 
-use Illuminate\Auth\SessionGuard;
+use EvansKim\GnuMigration\Listeners\LogSuccessfulGnuLogin;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Auth;
+
 
 class GnuMigrationServiceProvider extends ServiceProvider
 {
@@ -16,8 +18,6 @@ class GnuMigrationServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . "/routes.php");
 
-        $this->publishes([
-            __DIR__.'/migrations/' => database_path('migrations')
-        ], 'migrations');
+        Event::listen(\Illuminate\Auth\Events\Login::class, LogSuccessfulGnuLogin::class);
     }
 }

@@ -7,9 +7,7 @@ use EvansKim\GnuMigration\AuthenticatesGnuMembers;
 
 /**
  * Class LoginController
- * @group 그누보드 사용자 인증
- *
- * 사용자 로그인, 회원가입, 비밀번호 변경, 찾기
+ * @group Member
  *
  * @package EvansKim\GnuMigration\Controller
  */

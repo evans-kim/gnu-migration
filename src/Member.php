@@ -31,6 +31,10 @@ class Member extends Authenticatable
 
     protected $fillable = ['mb_id', 'mb_password', 'mb_email', 'mb_name', 'mb_nick', 'mb_birth','mb_sex'];
 
+    public function points()
+    {
+        return $this->hasMany(Point::class,'mb_id', 'mb_id');
+    }
     static public function hash($value)
     {
         return \DB::select("select password(?) as password", [$value])[0]->password;

@@ -46,6 +46,17 @@ class GnuUserProvider implements UserProvider
     {
         $user->mb_remember = $token;
         $user->save();
+
+        $user->setRememberToken($token);
+
+        $timestamps = $user->timestamps;
+
+        $user->timestamps = false;
+
+        $user->save();
+
+        $user->timestamps = $timestamps;
+
     }
 
     /**
@@ -56,9 +67,14 @@ class GnuUserProvider implements UserProvider
      */
     public function retrieveByCredentials(array $credentials)
     {
-        $user = $this->retrieveById($credentials['mb_id']);
-        if( !$this->validateCredentials( $user, $credentials) ){
-            return null;
+        if(array_key_exists('email', $credentials)){
+            //email 필드는 비밀번호 찾기용
+            $user = Member::where("mb_email", $credentials['email'])->first();
+        }else{
+            $user = $this->retrieveById($credentials['mb_id']);
+            if( !$this->validateCredentials( $user, $credentials) ){
+                return null;
+            }
         }
         return $user;
     }

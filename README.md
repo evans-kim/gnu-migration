@@ -21,7 +21,7 @@ gnu4 R.I.P
 #### TODO
 - ~~기존 사용자 로그인~~
 - ~~비밀번호 찾기~~ 
-- 사용자 가입
+- ~~사용자 가입~~
 - 게시판
     - 게시판 CRUD
     - 게시판 스킨설정 (Vue Dynamic Components)
@@ -48,6 +48,34 @@ gnu4 R.I.P
 이후 필요한 기능을 아래에서 찾아 적용하시면 됩니다.
 
     composer require evanskim/gnu-magration
+
+그누보드4 데이터베이스를 사용하는데 가장 큰 문제는 date 타입 컬럼에 디폴트로 '0000-00-00 00:00:00' 설정된 점 입니다.
+최근 (mysql 5.7 이상) 에서는 이를 허용하지 않으므로 디폴트를 null 로 변경해 주어야 합니다.
+이를 위해서는 마이그레이션을 실행하기 전에 config/database.php 의 strict 값을 false 로 변경하고 실행해야 에러가 무시되고
+date 타입의 디폴트 값이 null 로 변경됩니다. 
+
+기존의 컬럼을 변경해야 하기 위해선 아래의 패키지가 설치되어 있어야 합니다.
+
+    composer require doctrine/dbal
+    
+config/database.php
+
+    'mysql' => [
+        'driver' => 'mysql',
+        'host' => env('DB_HOST', '127.0.0.1'),
+        'port' => env('DB_PORT', '3306'),
+        'database' => env('DB_DATABASE', 'forge'),
+        'username' => env('DB_USERNAME', 'forge'),
+        'password' => env('DB_PASSWORD', ''),
+        'unix_socket' => env('DB_SOCKET', ''),
+        'charset' => 'utf8mb4', // 경우에 따라 utf8 으로 설정
+        'collation' => 'utf8mb4_unicode_ci', // 경우에 따라 utf8_unicode_ci 으로 설정
+        'prefix' => '',
+        'prefix_indexes' => true,
+        'strict' => false, // true 값을 false 로 변경!
+        'engine' => null,
+    ],
+
 
 #### 1.사용자 인증
 기존의 g4_member 테이블에 있는 사용자 정보를 그대로 이용하여 라라벨에서 로그인 할 수 있습니다.
@@ -102,6 +130,26 @@ config/auth.php
         ],
     ],
     
+아래의 컨트롤러 트레이스를 변경해 주세요.
+app\Http\Controllers\Auth\ResetPasswordController.php
+    
+    //use Illuminate\Foundation\Auth\ResetsPasswords;
+    use EvansKim\GnuMigration\GnuResetsPasswords as ResetsPasswords;
+    
+    
 API
 
-    curl -X POST "http://mydomain/bbs/password_lost2.php"     -d "email"="test@test.com" 
+    curl -X POST "http://mydomain/bbs/password_lost2.php"     -d "email"="test@test.com"
+    
+#### 3. 회원가입
+라라벨의 인증 기능을 그대로 차용하여 확장하였기 때문에 라라벨의 이벤트와 리스너 , Telescope 에서도 라라벨 기본 인증과
+동일하게 확장하여 쓸 수 있습니다.
+ 
+API
+
+    curl -X POST "http://gnu-migration.com/bbs/register_form_update.php"     \
+        -d "mb_id"="test" \
+        -d "mb_password"="Test1234" \
+        -d "mb_name"="홍길동" \
+        -d "mb_nick"="테스터" \
+        -d "mb_email"="tester@test.com" 
