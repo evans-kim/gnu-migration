@@ -76,6 +76,12 @@ config/database.php
         'engine' => null,
     ],
 
+session 드라이버를 사용할 때에는 반드시 g4_member 테이블에 mb_no (auto increment primary key) 필드가 있어야 합니다.
+만약에 해당 필드가 없다면 마이그레이션 파일을 추가하고 마이그레이션 하세요.
+자동로그인 기능을 위해서도 아래의 마이그레이션을 추가하고 실행하세요.    
+
+    php artisan vendor:publish --tag=migrations
+    php artisan migrate
 
 #### 1.사용자 인증
 기존의 g4_member 테이블에 있는 사용자 정보를 그대로 이용하여 라라벨에서 로그인 할 수 있습니다.
@@ -103,12 +109,6 @@ config/auth.php
             'driver' => 'gnu'
         ],
     ]
-
-session 드라이버를 사용할 때에는 반드시 g4_member 테이블에 mb_no (auto increment primary key) 필드가 있어야 합니다.
-만약에 해당 필드가 없다면 마이그레이션 파일을 추가하고 마이그레이션 하세요.
-자동로그인 기능을 위해서도 아래의 마이그레이션을 추가하고 실행하세요.
-
-    php artisan vendor:publish --tag=config    
 
 폼필드 값을 보낼 라우트는 기존의 값과 동일합니다. 대부분의 정적 라우트 값을 그대로 차용하는 것을 원칙으로 합니다.
 
