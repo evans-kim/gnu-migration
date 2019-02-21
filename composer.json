@@ -1,5 +1,5 @@
 {
-    "name": "evanskim/gnu-magration",
+    "name": "evanskim/gnu-migration",
     "description": ": Migration Tools for Gnuboard4",
     "type": "library",
     "require": {
