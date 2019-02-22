@@ -208,4 +208,6 @@ public/js 으로 해당 스크립트를 컴파일링 합니다.
 
 http://gnu-migration.com/bbs/board.php?bo_table=test
 
+![Image of Example](https://evans-kim.github.io/gnu-migration/shots/shot01.png)
+
 
