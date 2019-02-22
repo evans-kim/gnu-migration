@@ -10,4 +10,15 @@ Route::namespace('EvansKim\\GnuMigration\\Controller')
     Route::post("/logout.php", "LoginController@logout");
     Route::post("/password_lost2.php", "ForgotPasswordController@sendResetLinkEmail")->name("password.email");
     Route::post("/register_form_update.php", "RegisterController@register");
+
+    Route::get("/board.php", 'Board\\GnuBoardPostController@index');
 });
+
+Route::namespace('EvansKim\\GnuMigration\\Controller')
+    ->middleware(['web'])
+    ->name("gnu.api.")
+    ->prefix('api/v1')->group(function(){
+
+        Route::get("/board/{board}", 'Board\\GnuBoardController@show');
+    });
+

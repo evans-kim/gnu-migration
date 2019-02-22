@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Boards;
+
+use EvansKim\GnuMigration\GnuModel\GnuPost;
+use Illuminate\Support\Str;
+
+/**
+ * @property int $wr_id
+ * @property int $wr_num
+ * @property string|null $wr_reply
+ * @property int|null $wr_parent
+ * @property int $wr_is_comment
+ * @property int|null $wr_comment
+ * @property string|null $wr_comment_reply
+ * @property string|null $ca_name
+ * @property mixed $wr_option
+ * @property string|null $wr_subject
+ * @property string $wr_content
+ * @property string $wr_link1
+ * @property string $wr_link2
+ * @property int|null $wr_link1_hit
+ * @property int|null $wr_link2_hit
+ * @property string|null $wr_trackback
+ * @property int|null $wr_hit
+ * @property int|null $wr_good
+ * @property int|null $wr_nogood
+ * @property string|null $mb_id
+ * @property string|null $wr_password
+ * @property string|null $wr_name
+ * @property string|null $wr_email
+ * @property string|null $wr_homepage
+ * @property \Carbon\Carbon|null $wr_datetime
+ * @property string|null $wr_last
+ * @property string|null $wr_ip
+ * @property string|null $wr_1
+ * @property string|null $wr_2
+ * @property string|null $wr_3
+ * @property string|null $wr_4
+ * @property string|null $wr_5
+ * @property string|null $wr_6
+ * @property string|null $wr_7
+ * @property string|null $wr_8
+ * @property string|null $wr_9
+ * @property string|null $wr_10
+ * @property-read mixed $config
+ * @property-read mixed $extensions
+ * @property-read mixed $thumb_text
+ * @property-read mixed $thumbnail
+ * @method static \Illuminate\Database\Eloquent\Builder|\EvansKim\GnuMigration\GnuModel\GnuPost exceptSecretContent()
+ * @method static \Illuminate\Database\Eloquent\Builder|\EvansKim\GnuMigration\GnuModel\GnuPost findWithRelations($id)
+ * @method static \Illuminate\Database\Eloquent\Builder|\EvansKim\GnuMigration\GnuModel\GnuPost postOnly()
+ * @method static \Illuminate\Database\Eloquent\Builder|\EvansKim\GnuMigration\GnuModel\GnuPost search(\Illuminate\Http\Request $request, $or = false)
+ * @mixin \Illuminate\Database\Eloquent\
+ */
+class DummyClass extends GnuPost
+{
+    protected $table = "g4_write_DummyName";
+    protected $primaryKey = 'wr_id';
+    public $incrementing = true;
+    const CREATED_AT = 'wr_datetime';
+    const UPDATED_AT = null;
+
+    public function __construct($attributes=[])
+    {
+        $this->board_id = Str::snake(class_basename(self::class));
+        $this->table = "g4_write_" . $this->board_id;
+        parent::__construct($attributes);
+    }
+}
