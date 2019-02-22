@@ -169,11 +169,12 @@ API
 이번에 선택한 게시판 스킨의 주요 기술은 Vue Dynamic Component 입니다. 비동기 방식으로 Vue component 를 불러오는 방식인데요.
 게시판에 설정된 스킨명을 따라 게시판의 전체 테마 그리고 각 기능별 주요 페이지를 별도로 커스터마이징 할 수 있습니다.
 아래와 같이 Theme 컴포넌트 안에 슬롯으로 BoardList,CreateForm,UpdateForm,ReplyForm,ShowPage 등이 들어갈 수 있습니다.
-<board-dynamic>
-    <theme>
-        <board-list></board-list>
-    </theme>
-</board-dynamic> 
+    
+    <board-dynamic>
+        <theme>
+            <board-list></board-list>
+        </theme>
+    </board-dynamic> 
 
 ###### 4.1. 게시판 모델
 
