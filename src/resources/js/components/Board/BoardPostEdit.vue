@@ -51,7 +51,7 @@
         },
         computed : {
             apiUrl(){
-                return "/api/v1/board/"+this.boardId+"/post/"+this.postId;
+                return "/bbs/board/"+this.boardId+"/post/"+this.postId;
             },
         },
         methods : {

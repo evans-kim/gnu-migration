@@ -57,7 +57,7 @@
         computed : {
 
             apiUrl(){
-                return "/api/v1/board/"+this.boardId+"/post";
+                return "/bbs/board/"+this.boardId+"/post";
             },
         },
         methods : {

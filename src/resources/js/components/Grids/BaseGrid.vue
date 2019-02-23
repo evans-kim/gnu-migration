@@ -120,7 +120,7 @@
         },
         data() {
             return {
-                apiUrl : '/api/v1/board',
+                apiUrl : '/bbs/board',
                 process : {
                     show : false,
                     total : 1,

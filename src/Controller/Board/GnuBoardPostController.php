@@ -15,14 +15,21 @@ class GnuBoardPostController extends Controller
 
     public function index(Request $request)
     {
-        if(!$request->ajax())
-            return view("gnu::board-index", ['user'=>auth()->user()]);
+        if(!$request->ajax()){
 
+            return view("gnu::board-index", ['user'=>auth()->user()]);
+        }
 
         if($request->has('bo_table')){
             $this->validate($request, ['bo_table'=>'string']);
             $board = $request->bo_table;
         }
+
+        if($request->has("wr_id") && $request->has("bo_table")){
+            $this->validate($request, ['wr_id'=>'numeric', 'bo_table'=>'alpha_dash']);
+            return $this->show($request, $request->bo_table, $request->wr_id);
+        }
+
         $config = GnuBoard::selectLevelConfig()->findOrFail($board);
         /**
          * @var $config GnuBoard

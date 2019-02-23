@@ -12,13 +12,27 @@ Route::namespace('EvansKim\\GnuMigration\\Controller')
     Route::post("/register_form_update.php", "RegisterController@register");
 
     Route::get("/board.php", 'Board\\GnuBoardPostController@index');
+
+    Route::get("/board.php/{any}", function(){
+        return view("gnu::board-index", ['user'=>auth()->user()]);
+    })->where('any', '.*');
 });
 
-Route::namespace('EvansKim\\GnuMigration\\Controller')
+Route::namespace('EvansKim\\GnuMigration\\Controller\\Board')
     ->middleware(['web'])
     ->name("gnu.api.")
-    ->prefix('api/v1')->group(function(){
+    ->prefix('api/g4')->group(function(){
 
-        Route::get("/board/{board}", 'Board\\GnuBoardController@show');
+        Route::get("/board/{board}", 'GnuBoardController@show');
+        Route::get("/board/{board}/post", "GnuBoardPostController@index");
+        Route::post("/board/{board}/post", "GnuBoardPostController@store");
+        Route::get("/board/{board}/post/{post_id}", "GnuBoardPostController@show");
+        Route::put("/board/{board}/post/{post_id}", "GnuBoardPostController@update");
+        Route::delete("/board/{board}/post/{post_id}", "GnuBoardPostController@destroy");
+
+        Route::get("/board/{board_id}/post/{post_id}/comment", "GnuBoardPostCommentController@index");
+        Route::post("/board/{board_id}/post/{post_id}/comment", "GnuBoardPostCommentController@store");
+        Route::delete("/board/{board_id}/post/{post_id}/comment/{comment_id}", "GnuBoardPostCommentController@destroy");
+
     });
 

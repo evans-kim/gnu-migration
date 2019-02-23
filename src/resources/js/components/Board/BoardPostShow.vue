@@ -122,7 +122,7 @@
                 return '';
             },
             apiUrl() {
-                return "/api/v1/board/" + this.boardId + "/post/" + this.postId + "/comment";
+                return "/api/g4/board/" + this.boardId + "/post/" + this.postId + "/comment";
             },
         },
         methods: {
@@ -211,7 +211,7 @@
                 return comment.wr_comment_reply.length;
             },
             getPost() {
-                return axios.get("/api/v1/board/" + this.boardId + "/post/" + this.postId).then(
+                return axios.get("/api/g4/board/" + this.boardId + "/post/" + this.postId).then(
                     (res) => {
                         this.board = res.data.board;
                         this.post = res.data.post;

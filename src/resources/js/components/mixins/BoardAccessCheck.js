@@ -43,18 +43,18 @@ export default {
             return this.$router.push({name:'boardPostCreatePage', params:{ board:this.board.bo_table }});
         },
         goList(){
-            return this.$router.push({name:'boardPostListPage', params:{ board:this.board.bo_table }});
+            return this.$router.push({name:'BoardPostListPage', query:{ bo_table:this.board.bo_table }});
         },
         goEdit(){
             return this.$router.push({name:'boardPostEditPage', params:{ board:this.board.bo_table, post:this.post.wr_id }});
         },
         confirmDelete(){
-            this.$confirm( __('정말로 삭제하시겠습니까? 삭제된 데이터는 복구할 수 없습니다.','This post will be deleted permanently. Do you want to continue'), 'Warning', {
-                confirmButtonText: this.__('예, 삭제합니다.','Yes, delete it.'),
-                cancelButtonText: this.__('아니요, 취소합니다.','No, I don`t.'),
+            this.$confirm( '정말로 삭제하시겠습니까? 삭제된 데이터는 복구할 수 없습니다.', 'Warning', {
+                confirmButtonText: '예, 삭제합니다.',
+                cancelButtonText: '아니요, 취소합니다.',
                 type: 'warning'
             }).then(() => {
-                axios.delete( "/api/v1/board/"+this.board.bo_table+"/post/"+this.post.wr_id ).then(
+                axios.delete( "/api/g4/board/"+this.board.bo_table+"/post/"+this.post.wr_id ).then(
                     (res)=>{
                         this.$message({
                             type: 'success',

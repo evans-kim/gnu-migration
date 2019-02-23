@@ -1,7 +1,7 @@
 f<template>
     <div>
         <h1>그누보드 마스터</h1>
-        <board-dynamic board="notice" mode="List"></board-dynamic>
+        <router-view></router-view>
     </div>
 </template>
 <script>

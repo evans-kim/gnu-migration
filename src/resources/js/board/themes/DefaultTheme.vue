@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h1>게시판</h1>
+        <h1>기본 게시판</h1>
         <slot></slot>
     </section>
 </template>

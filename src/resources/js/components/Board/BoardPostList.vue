@@ -8,9 +8,8 @@
                     <el-table-column prop="wr_subject" label="제목">
                         <template slot-scope="scope">
                             <div class="wr_subject">
-
                                 <span v-if="!!scope.row.wr_reply">[답변]</span>
-                                <router-link :to="postRoute+'/'+scope.row.wr_id">{{scope.row.wr_subject}}</router-link>
+                                <router-link :to="postRoute+scope.row.wr_id">{{scope.row.wr_subject}}</router-link>
                                 <span v-if="!!['secret'].includes(scope.row.wr_option)"><i class="fa fa-lock"></i></span>
                             </div>
                         </template>
@@ -29,7 +28,7 @@
                     </el-button>
                 </div>
                 <el-pagination
-                        style="padding-bottom: 10px;"
+                        style="padding-bottom: 10px; text-align: center"
                         class="text-center"
                         background
                         :pager-count="5"
@@ -79,7 +78,7 @@
                 return width;
             },
             postRoute(){
-                return '/api/shop/board/'+this.boardId+'/post';
+                return '/bbs/board.php/'+this.boardId+'/post/';
             }
         },
         data() {

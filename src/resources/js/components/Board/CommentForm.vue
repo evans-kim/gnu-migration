@@ -26,7 +26,7 @@
         methods : {
             submit(){
                 this.loading = true;
-                axios.post("/api/v1/board/"+this.boardId+"/post/"+this.postId + "/comment",this.newItem).then(
+                axios.post("/bbs/board/"+this.boardId+"/post/"+this.postId + "/comment",this.newItem).then(
                     (res)=>{
                         this.newItem.wr_content = '';
                         this.loading = false;

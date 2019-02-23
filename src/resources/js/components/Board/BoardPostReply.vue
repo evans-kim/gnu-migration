@@ -49,7 +49,7 @@
         },
         computed : {
             apiUrl(){
-                return "/api/v1/board/"+this.boardId+"/post";
+                return "/bbs/board/"+this.boardId+"/post";
             },
         },
         methods : {
@@ -65,7 +65,7 @@
             },
             getParent(){
                 this.loading = true;
-                axios.get("/api/v1/board/"+this.boardId+"/post/"+this.parentId).then(
+                axios.get("/bbs/board/"+this.boardId+"/post/"+this.parentId).then(
                     (res)=>{
                         this.board = res.data.board;
                         this.parent = res.data.post;

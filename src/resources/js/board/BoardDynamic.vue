@@ -75,7 +75,7 @@
 
             },
             getParent(){
-                axios.get("/api/v1/board/"+this.board).then(
+                axios.get("/api/g4/board/"+this.board).then(
                     ( res )=>{
 
                         this.config = res.data;

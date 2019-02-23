@@ -11,7 +11,8 @@ import VueRouter from 'vue-router'
 Vue.use( VueRouter );
 
 import routes from './pages'
-
+import NotFoundComponent from './pages/errors/404';
+routes.push({ path: '*', name:'NotFoundPage', component: NotFoundComponent });
 
 const scrollBehavior = function (to, from, savedPosition) {
     return { x: 0, y: 0 }
@@ -77,8 +78,9 @@ const components = {
 };
 
 window.vm = new Vue({
+    el : '#app',
     router,
     components,
     render: h => h(Master)
-}).$mount('#app');
+});
 
