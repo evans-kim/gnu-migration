@@ -22,12 +22,12 @@ gnu4 R.I.P
 - ~~기존 사용자 로그인~~
 - ~~비밀번호 찾기~~ 
 - ~~사용자 가입~~
-- 게시판
-    - 게시판 CRUD
-    - 게시판 스킨설정 (Vue Dynamic Components)
-    - 게시글 CRUD
-    - 답글 CRUD
-    - 코멘트 CRUD
+- ~~게시판~~
+    - ~~게시판 CRUD~~
+    - ~~게시판 스킨설정 (Vue Dynamic Components)~~
+    - ~~게시글 CRUD~~
+    - ~~답글 CRUD~~
+    - ~~코멘트 CRUD~~
     - 첨부파일 CRUD
     - 접근권한설정
 - 관리자 페이지
