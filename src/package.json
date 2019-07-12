@@ -7,7 +7,7 @@
         "cross-env": "^5.1",
         "jquery": "^3.4",
         "laravel-mix": "^4.0.7",
-        "lodash": "^4.17.5",
+        "lodash": "^4.17.13",
         "popper.js": "^1.12",
         "vue": "^2.6.6",
         "vue-router": "^2.6.6",
